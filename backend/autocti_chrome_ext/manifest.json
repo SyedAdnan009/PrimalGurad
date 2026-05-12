@@ -1,0 +1,54 @@
+
+{
+  "manifest_version": 3,
+  "name": "PrimalGuard Browser Protector",
+  "version": "1.0",
+
+  "permissions": [
+    "tabs",
+    "webNavigation",
+    "scripting",
+    "storage",
+    "notifications",
+    "downloads",
+    "declarativeNetRequest",
+    "declarativeNetRequestWithHostAccess",
+    "http://localhost:8000/*"
+  ],
+
+  "host_permissions": [
+    "http://*/*",
+    "https://*/*"
+  ],
+
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "<all_urls>"
+      ],
+      "js": ["content_script.js"],
+      "run_at": "document_start",
+      "all_frames": false
+    }
+  ],
+
+  "background": {
+    "service_worker": "background.js"
+  },
+
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "block_page/dist/index.html",
+        "block_page/dist/assets/*"
+      ],
+      "matches": ["<all_urls>"]
+    }
+  ],
+
+  "action": {
+    "default_title": "PrimalGuard Browser Protector"
+  }
+}
